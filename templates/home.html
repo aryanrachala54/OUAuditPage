@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OU Dashboard</title>
+    <link rel="icon" href="/static/assets/img/Osmania-University.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="/static/assets/css/DropDown.css">
+    <link rel="stylesheet" href="/static/assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+    <script src="../static/assets/js/script.js"></script>
+</head>
+
+<body>
+    <!-- sidebar  -->
+    <!-- <div class="ou-sidebar ou-font" style="width:20% ">
+        <img src="/static/assets/img/logo-192x192.png" alt="OU Logo">
+        <a href="#" class="ou-bar-item"><i class="fa fa-home" aria-hidden="true"></i> Dashboard</a>
+        <a href="#" class="ou-bar-item"><i class="fa fa-university" aria-hidden="true"></i> Colleges</a>
+        <a href="#" class="ou-bar-item"><i class="fa fa-address-book" aria-hidden="true"></i> Attendance</a>
+        <a href="#" class="ou-bar-item"><i class="fa fa-user" aria-hidden="true"></i> Profile</a>
+        <a href="#" class="ou-bar-item" style="color:rgba(255, 0, 0, 0.784)"><i class="fa fa-sign-out"
+                aria-hidden="true"></i> Log Out</a>
+        <a href="#" class="ou-bar-item ou-bar-item-last"><i class="fa fa-fw fa-envelope"></i> Feedback</a>
+    </div> -->
+    <!-- End Of SideBar Code -->
+
+    <!-- Page Content -->
+    <div class="page-content ou-font">
+        <div class="flex-row">
+            <img src="/static/assets/img/Osmania-University2.jpg" alt="OU Logo">
+
+            <div class="stat-box" style="width: 270px;">
+                <div class="text prgrmText" style="left: 120px;">Total. <br>Programs</div>
+                <h1 class="number" style="margin-top:10px">{{sno}}</h1>
+            </div>
+            <div class="stat-box">
+                <div class="text clgText">Total. <br> Aff. Colleges</div>
+                <h1 class="number" style="margin-top:10px">{{clgCount}}</h1>
+            </div>
+
+            <div class="button-box">
+                <!-- start of admin dropdown -->
+                <div class="dropdown1">
+                    {% if session.loggedin %}
+                    <div class="dropbtn1"><i class="fas fa-user-circle admin-logged"></i></div>
+                    <div class="dropdown1-content">
+                        <a>{{session.username}}</a>
+                        <a href="/logout" class="logout-btn">Log-Out</a>
+                    {% else %}
+                    <div class="dropbtn1"><i class="fas fa-user-circle"></i></div>
+                    <div class="dropdown1-content">
+                        <a href="/login" class="login-btn">Log-In</a>
+                    {% endif %}
+                    </div>
+                </div>
+                <!-- end of admin dropdown -->
+                <a href="/search" target="_blank" class="custom-search"><i class="fas fa-search"></i> Search by Filters </a>
+            </div>
+            <!-- <img src="/static/assets/img/profilepic.jpeg" alt="" class="profile-pic"> -->
+        </div>
+
+        <!-- TABLE search -->
+        <input type="text" id="myInput" onkeyup="prgrmSearch()" placeholder="Enter Course Name" title="Type in a name">
+        <!-- table content -->
+        <div id="course-table">
+            <table width="100%">
+                <thead>
+                    <tr>
+                        <th>Sl.No.</th>
+                        <th>Program</th>
+                        <th>No of Colleges</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for i in range(sno)%}
+                    <tr>
+                        <td>{{i+1}}.</td>
+                        <td><a href="/program?prgrm={{details[i][0]}}">{{details[i][0]}}</a></td>
+                        <td>{{details[i][1]}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
